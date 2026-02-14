@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafeHer — Confidential Evidence Collection & Support Portal</title>
+  <meta name="description" content="A confidential portal helping survivors of sexual assault collect forensic evidence securely, connect with nearby hospitals, and file anonymous police reports — with complete privacy protection." />
+  <meta name="theme-color" content="#0a0e1a" />
+  <meta property="og:title" content="SafeHer — Confidential Evidence Collection Portal" />
+  <meta property="og:description" content="Secure, anonymous evidence collection and police reporting for survivors of sexual assault." />
+  <meta property="og:type" content="website" />
+
+  <!-- Leaflet CSS for Maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated Background Orbs -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+  </div>
+
+  <!-- Quick Exit Button -->
+  <button class="quick-exit" id="quickExit" title="Quickly leave this site (Esc)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    Quick Exit
+  </button>
+
+  <!-- ======== NAVIGATION ======== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#hero" class="nav-logo">
+        <div class="logo-icon">🛡️</div>
+        <span>Safe<span class="text-gradient">Her</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#hospital-finder">Find Hospital</a></li>
+        <li><a href="#case-filing">File a Case</a></li>
+        <li><a href="#track-case">Track Case</a></li>
+        <li><a href="#emergency">Emergency</a></li>
+        <li><a href="#case-filing" class="nav-cta">Get Help Now</a></li>
+      </ul>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ======== HERO SECTION ======== -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="pulse-dot"></span>
+            100% Confidential &amp; Anonymous
+          </div>
+          <h1 class="hero-title">
+            Your Safety.<br/>
+            Your <span class="text-gradient">Evidence.</span><br/>
+            Your <span class="text-gradient-warm">Justice.</span>
+          </h1>
+          <p class="hero-description">
+            We connect you with the nearest hospital for confidential forensic evidence collection. 
+            Your report goes directly to the police — your identity stays protected from public and media. 
+            No delays. No exposure. Only justice.
+          </p>
+          <div class="hero-actions">
+            <a href="#case-filing" class="btn btn-primary btn-lg">
+              🛡️ Get Help Now
+            </a>
+            <a href="#how-it-works" class="btn btn-secondary btn-lg">
+              Learn How It Works
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card-stack">
+            <div class="hero-feature-card">
+              <div class="card-icon">🏥</div>
+              <h3>Nearest Hospital Allocated</h3>
+              <p>Instantly find the closest hospital equipped for confidential forensic examination.</p>
+            </div>
+            <div class="hero-feature-card">
+              <div class="card-icon">📋</div>
+              <h3>Evidence Report Collected</h3>
+              <p>Forensic evidence is professionally documented and securely stored for legal proceedings.</p>
+            </div>
+            <div class="hero-feature-card">
+              <div class="card-icon">🔒</div>
+              <h3>Sent Directly to Police</h3>
+              <p>Report is transmitted to the nearest police station — your identity remains fully anonymous.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== PRIVACY BANNER ======== -->
+  <div class="privacy-banner">
+    <div class="container">
+      <div class="privacy-item">
+        <div class="icon">🔒</div>
+        <span>End-to-End Encrypted</span>
+      </div>
+      <div class="privacy-item">
+        <div class="icon">👤</div>
+        <span>No Personal Data Stored</span>
+      </div>
+      <div class="privacy-item">
+        <div class="icon">🚫</div>
+        <span>No Media Access</span>
+      </div>
+      <div class="privacy-item">
+        <div class="icon">🕶️</div>
+        <span>Quick Exit Enabled</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== HOW IT WORKS ======== -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Simple Process</div>
+        <h2 class="section-title">How It <span class="text-gradient">Works</span></h2>
+        <p class="section-subtitle">
+          A secure, 4-step confidential process designed to protect your privacy at every stage.
+        </p>
+      </div>
+
+      <div class="steps-timeline">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-icon">📍</div>
+          <h3>Locate Nearest Hospital</h3>
+          <p>We use your location to find the closest hospital equipped for confidential forensic examination.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-icon">🏥</div>
+          <h3>Visit for Examination</h3>
+          <p>Visit the allocated hospital for a private medical examination. Evidence is collected by trained professionals.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-icon">📋</div>
+          <h3>File Anonymous Report</h3>
+          <p>Fill out a secure, anonymous report form. You receive a unique Case ID — no personal identification required.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div class="step-icon">🚔</div>
+          <h3>Report Sent to Police</h3>
+          <p>Your evidence report is transmitted directly to the jurisdiction's police station. Track your case status anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== HOSPITAL FINDER ======== -->
+  <section class="hospital-finder" id="hospital-finder">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 48px;">
+        <div class="section-label">Hospital Finder</div>
+        <h2 class="section-title">Find Your <span class="text-gradient">Nearest Hospital</span></h2>
+        <p class="section-subtitle">
+          We'll locate hospitals near you that are equipped for confidential forensic examination.
+        </p>
+      </div>
+
+      <div class="finder-grid">
+        <div class="finder-content">
+          <div class="location-status" id="locationStatus">
+            <div class="status-row">
+              <span class="status-dot" id="statusDot"></span>
+              <span class="status-text" id="statusText">Location not detected</span>
+            </div>
+            <div class="coordinates" id="coordinates"></div>
+          </div>
+          <button class="btn btn-primary" id="detectLocationBtn" style="width:100%;justify-content:center;margin-bottom:24px;">
+            📍 Detect My Location
+          </button>
+
+          <div class="hospital-list" id="hospitalList">
+            <!-- Hospital cards populated by JS -->
+          </div>
+        </div>
+
+        <div class="map-container">
+          <div id="hospital-map"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CASE FILING ======== -->
+  <section class="case-filing" id="case-filing">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Anonymous Filing</div>
+        <h2 class="section-title">File a <span class="text-gradient">Confidential Case</span></h2>
+        <p class="section-subtitle">
+          Your identity is never stored. You'll receive a unique anonymous Case ID to track your report.
+        </p>
+      </div>
+
+      <div class="form-container">
+        <!-- Progress Bar -->
+        <div class="form-progress" id="formProgress">
+          <div class="progress-step">
+            <div class="progress-dot active" data-step="1">1</div>
+            <span class="progress-label">Incident</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <div class="progress-dot" data-step="2">2</div>
+            <span class="progress-label">Details</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <div class="progress-dot" data-step="3">3</div>
+            <span class="progress-label">Hospital</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <div class="progress-dot" data-step="4">4</div>
+            <span class="progress-label">Review</span>
+          </div>
+        </div>
+
+        <form id="caseForm" novalidate>
+          <!-- Step 1: Incident Info -->
+          <div class="form-step active" id="step1">
+            <h3 class="form-step-title">Incident Information</h3>
+            <p class="form-step-desc">Please provide basic details about the incident. All information is handled with strict confidentiality.</p>
+
+            <div class="privacy-notice">
+              <div class="notice-icon">🔒</div>
+              <p>This form does not collect any personal identifiers — no name, no phone, no email. Your anonymity is fully protected.</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="incidentDate">Date of Incident *</label>
+              <input type="date" class="form-input" id="incidentDate" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="incidentTime">Approximate Time</label>
+              <select class="form-select" id="incidentTime">
+                <option value="">Select time range</option>
+                <option value="morning">Morning (6 AM – 12 PM)</option>
+                <option value="afternoon">Afternoon (12 PM – 6 PM)</option>
+                <option value="evening">Evening (6 PM – 10 PM)</option>
+                <option value="night">Night (10 PM – 6 AM)</option>
+                <option value="unknown">Don't remember</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="incidentLocation">General Area / Locality</label>
+              <input type="text" class="form-input" id="incidentLocation" placeholder="E.g., Near Central Park, Downtown area..." />
+              <span class="form-hint">🔒 Do not provide your exact address</span>
+            </div>
+
+            <div class="form-actions">
+              <div></div>
+              <button type="button" class="btn btn-primary" onclick="nextStep(1)">Continue →</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Additional Details -->
+          <div class="form-step" id="step2">
+            <h3 class="form-step-title">Additional Details</h3>
+            <p class="form-step-desc">Any additional information that may help the investigation. Share only what you're comfortable with.</p>
+
+            <div class="form-group">
+              <label class="form-label" for="description">Brief Description</label>
+              <textarea class="form-textarea" id="description" placeholder="Describe what happened in your own words. Share only what you feel comfortable sharing..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="suspectInfo">Suspect Information (if any)</label>
+              <textarea class="form-textarea" id="suspectInfo" placeholder="Any identifying features, relationship to you, or other details about the suspect..." style="min-height:80px;"></textarea>
+              <span class="form-hint">🔒 Optional — share only if comfortable</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="ageRange">Your Age Range</label>
+              <select class="form-select" id="ageRange">
+                <option value="">Prefer not to say</option>
+                <option value="under18">Under 18</option>
+                <option value="18-25">18 – 25</option>
+                <option value="26-35">26 – 35</option>
+                <option value="36-45">36 – 45</option>
+                <option value="46+">46 and above</option>
+              </select>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" onclick="prevStep(2)">← Back</button>
+              <button type="button" class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Hospital Selection -->
+          <div class="form-step" id="step3">
+            <h3 class="form-step-title">Hospital Selection</h3>
+            <p class="form-step-desc">Select a hospital for your forensic examination. You can also detect your location to find the nearest one.</p>
+
+            <div class="form-group">
+              <label class="form-label" for="selectedHospital">Assigned Hospital *</label>
+              <select class="form-select" id="selectedHospital" required>
+                <option value="">Select a hospital</option>
+                <option value="city-general">City General Hospital — Forensic Unit</option>
+                <option value="women-care">Women's Care Medical Center</option>
+                <option value="district-med">District Medical College Hospital</option>
+                <option value="govt-hospital">Government Hospital — Women's Wing</option>
+                <option value="mercy-hospital">Mercy Hospital — SAFE Center</option>
+              </select>
+              <span class="form-hint">📍 Or use the Hospital Finder above to find the nearest one</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="preferredDate">Preferred Visit Date</label>
+              <input type="date" class="form-input" id="preferredDate" />
+              <span class="form-hint">We recommend visiting as soon as possible for best evidence collection</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="policeStation">Nearest Police Station</label>
+              <select class="form-select" id="policeStation">
+                <option value="">Auto-assign based on location</option>
+                <option value="central-ps">Central Police Station</option>
+                <option value="women-ps">Women's Police Station</option>
+                <option value="district-ps">District Police Station</option>
+                <option value="cyber-ps">Cyber Crime Police Station</option>
+              </select>
+              <span class="form-hint">The forensic report will be sent to this station</span>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" onclick="prevStep(3)">← Back</button>
+              <button type="button" class="btn btn-primary" onclick="nextStep(3)">Continue →</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Review & Submit -->
+          <div class="form-step" id="step4">
+            <h3 class="form-step-title">Review &amp; Submit</h3>
+            <p class="form-step-desc">Please review the information below before submitting. Once submitted, you will receive a unique anonymous Case ID.</p>
+
+            <div id="reviewSummary" style="margin-bottom:28px;">
+              <!-- Populated by JS -->
+            </div>
+
+            <div class="privacy-notice">
+              <div class="notice-icon">🛡️</div>
+              <p><strong>Before you submit:</strong> No personal identifiers are stored. Your report will be encrypted and sent directly to the selected police station. You will receive a Case ID to track progress. This cannot be linked back to your identity.</p>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" onclick="prevStep(4)">← Back</button>
+              <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">🛡️ Submit Anonymous Report</button>
+            </div>
+          </div>
+
+          <!-- Step 5: Success -->
+          <div class="form-step" id="step5">
+            <div class="case-result">
+              <span class="success-icon">✅</span>
+              <h3>Report Filed Successfully</h3>
+              <p>Your anonymous report has been securely recorded. Please save your Case ID below — you'll need it to track your case progress.</p>
+              <div class="case-id-display">
+                <div class="label">Your Anonymous Case ID</div>
+                <div class="case-id" id="generatedCaseId">—</div>
+              </div>
+              <p style="margin-bottom: 28px;">
+                ⚠️ <strong>Important:</strong> Write this ID down somewhere safe. It is the only way to access your case status. This ID cannot be recovered.
+              </p>
+              <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                <button type="button" class="btn btn-primary" onclick="copyCaseId()">📋 Copy Case ID</button>
+                <a href="#track-case" class="btn btn-secondary">Track Your Case →</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== TRACK CASE ======== -->
+  <section class="track-case" id="track-case">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Case Tracking</div>
+        <h2 class="section-title">Track Your <span class="text-gradient">Case</span></h2>
+        <p class="section-subtitle">
+          Enter your anonymous Case ID to check the current status of your report.
+        </p>
+      </div>
+
+      <div class="track-container">
+        <div class="track-search">
+          <input type="text" class="form-input" id="trackInput" placeholder="Enter your Case ID (e.g. WS-2026-XXXX)" />
+          <button class="btn btn-primary" id="trackBtn">Track</button>
+        </div>
+
+        <div class="track-result" id="trackResult">
+          <div class="track-timeline" id="trackTimeline">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== EMERGENCY ======== -->
+  <section class="emergency" id="emergency">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Emergency Help</div>
+        <h2 class="section-title">Emergency <span class="text-gradient-warm">Contacts</span></h2>
+        <p class="section-subtitle">
+          If you are in immediate danger, please call these numbers. Help is available 24/7.
+        </p>
+      </div>
+
+      <div class="emergency-grid">
+        <div class="emergency-card">
+          <span class="card-emoji">🚨</span>
+          <h3>Women Helpline</h3>
+          <p>National Commission for Women — 24/7 toll-free helpline for women in distress.</p>
+          <span class="phone-number">181</span>
+          <a href="tel:181" class="btn btn-primary">Call Now</a>
+        </div>
+
+        <div class="emergency-card">
+          <span class="card-emoji">👮</span>
+          <h3>Police Emergency</h3>
+          <p>Immediate police assistance. Reports can be filed over the phone.</p>
+          <span class="phone-number">100</span>
+          <a href="tel:100" class="btn btn-outline">Call Police</a>
+        </div>
+
+        <div class="emergency-card">
+          <span class="card-emoji">💬</span>
+          <h3>One Stop Centre</h3>
+          <p>Sakhi Centre — integrated services including medical, legal, and counseling support.</p>
+          <span class="phone-number">7827-170-170</span>
+          <a href="tel:7827170170" class="btn btn-outline">Call Helpline</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span>🛡️</span>
+            Safe<span class="text-gradient">Her</span>
+          </div>
+          <p>
+            A confidential platform dedicated to helping survivors of sexual assault collect forensic evidence securely and file anonymous police reports — protecting identity at every step.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#hospital-finder">Find Hospital</a></li>
+            <li><a href="#case-filing">File a Case</a></li>
+            <li><a href="#track-case">Track Case</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Emergency</h4>
+          <ul>
+            <li><a href="tel:181">Women Helpline: 181</a></li>
+            <li><a href="tel:100">Police: 100</a></li>
+            <li><a href="tel:7827170170">One Stop Centre</a></li>
+            <li><a href="#emergency">All Contacts</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms of Use</a></li>
+            <li><a href="#disclaimer">Disclaimer</a></li>
+            <li><a href="#accessibility">Accessibility</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 SafeHer. Built with care for survivors. All rights reserved.</p>
+        <div class="footer-privacy-badges">
+          <span>🔒 Encrypted</span>
+          <span>👤 Anonymous</span>
+          <span>🚫 No Tracking</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======== DISCLAIMER MODAL ======== -->
+  <div class="modal-overlay" id="disclaimerModal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div style="text-align:center;margin-bottom:24px;">
+        <span style="font-size:3rem;">🛡️</span>
+        <h3 style="font-family:var(--font-heading);font-size:1.4rem;font-weight:700;margin-top:12px;">Welcome to SafeHer</h3>
+      </div>
+      <p style="font-size:0.92rem;color:var(--text-secondary);line-height:1.8;margin-bottom:20px;">
+        This is a <strong>confidential platform</strong> for survivors of sexual assault. We do not collect your personal information, 
+        and your visit to this website is not tracked.
+      </p>
+      <ul style="list-style:none;margin-bottom:28px;">
+        <li style="display:flex;align-items:start;gap:10px;margin-bottom:12px;font-size:0.88rem;color:var(--text-secondary);">
+          <span style="color:var(--accent-teal);font-weight:bold;">✓</span> Press <strong>ESC</strong> or the <strong style="color:#dc2626;">Quick Exit</strong> button to instantly leave this site
+        </li>
+        <li style="display:flex;align-items:start;gap:10px;margin-bottom:12px;font-size:0.88rem;color:var(--text-secondary);">
+          <span style="color:var(--accent-teal);font-weight:bold;">✓</span> No cookies, no login, no personal data is stored
+        </li>
+        <li style="display:flex;align-items:start;gap:10px;margin-bottom:12px;font-size:0.88rem;color:var(--text-secondary);">
+          <span style="color:var(--accent-teal);font-weight:bold;">✓</span> Your report is encrypted &amp; sent directly to police
+        </li>
+      </ul>
+      <button class="btn btn-primary" id="modalAccept" style="width:100%;justify-content:center;">
+        I Understand — Continue
+      </button>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Main Script -->
+  <script src="script.js"></script>
+</body>
+</html>
