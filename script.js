@@ -154,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initQuickExit();
   initTabMasking();
-  initDecoyMode();
   initMap();
   initLocationDetection();
   initHospitalSearch();
@@ -843,36 +842,6 @@ function initTabMasking() {
       }
     }
   });
-}
-
-// ─── Decoy / Camouflage Mode ───────────────────────────────────
-function initDecoyMode() {
-  const decoyBtn = document.getElementById('decoyModeBtn');
-  if (!decoyBtn) return;
-
-  decoyBtn.addEventListener('click', activateDecoy);
-
-  // Ctrl+M to toggle decoy
-  document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.key === 'm') {
-      e.preventDefault();
-      activateDecoy();
-    }
-  });
-}
-
-function activateDecoy() {
-  const decoyOverlay = document.getElementById('decoyOverlay');
-  if (!decoyOverlay) return;
-
-  decoyOverlay.classList.add('active');
-  document.title = 'Google Search';
-
-  // Click anywhere to deactivate
-  decoyOverlay.addEventListener('click', () => {
-    decoyOverlay.classList.remove('active');
-    document.title = ORIGINAL_TITLE;
-  }, { once: true });
 }
 
 // ─── Cover Your Tracks Modal ───────────────────────────────────

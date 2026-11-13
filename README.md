@@ -8,7 +8,6 @@ A confidential, privacy-first web portal designed to help sexual assault survivo
 
 ### 🛡️ Safety & Stealth Features
 - **Quick Exit (`Esc`)**: Instantly closes the portal and redirects to Google without storing session history. Intelligently closes modals first if open.
-- **Camouflage / Decoy Mode (`Ctrl+M`)**: A one-click disguise button instantly replaces the screen with an authentic Google Search lookalike interface. Click anywhere to return.
 - **Tab Title Masking**: Automatically masks the tab title to *"Google Search"* and changes the favicon whenever the user switches away or minimizes the tab.
 - **Cover Your Tracks Guide**: Built-in modal providing step-by-step instructions on private browsing, selective history deletion, and preventing shared account sync.
 
