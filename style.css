@@ -1159,7 +1159,7 @@ img {
 
 .emergency-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
 }
 
@@ -1345,6 +1345,296 @@ img {
   color: var(--text-primary);
 }
 
+/* --- Decoy Mode Button --- */
+.decoy-btn {
+  position: fixed;
+  top: 16px;
+  right: 140px;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-glass);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.decoy-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--text-primary);
+  border-color: var(--accent-teal);
+}
+
+/* --- Decoy Overlay --- */
+.decoy-overlay {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.decoy-overlay.active {
+  display: flex;
+}
+.decoy-content {
+  text-align: center;
+  max-width: 580px;
+  width: 100%;
+  padding: 20px;
+}
+.decoy-logo {
+  margin-bottom: 28px;
+  user-select: none;
+}
+.decoy-searchbar {
+  margin: 0 auto;
+  max-width: 480px;
+}
+.decoy-searchbar input {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 1rem;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  outline: none;
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.12);
+  font-family: Arial, sans-serif;
+  color: #222;
+  background: #fff;
+}
+.decoy-hint {
+  margin-top: 24px;
+  font-size: 0.75rem;
+  color: #aaa;
+  font-family: Arial, sans-serif;
+}
+
+/* --- Evidence Preservation Checklist Section --- */
+.checklist-section {
+  padding: var(--section-padding);
+  position: relative;
+  z-index: 2;
+  background: var(--bg-secondary);
+}
+
+.evidence-urgency-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgba(251, 188, 5, 0.08);
+  border: 1px solid rgba(251, 188, 5, 0.25);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-bottom: 40px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.evidence-urgency-banner .urgency-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+.evidence-urgency-banner strong {
+  color: #FBBC05;
+}
+
+.evidence-grid {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+/* Accordion Items */
+.evidence-accordion-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+.evidence-accordion-item:hover {
+  border-color: rgba(45, 212, 191, 0.2);
+}
+
+.evidence-accordion-trigger {
+  width: 100%;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  transition: background var(--transition-fast);
+}
+.evidence-accordion-trigger:hover {
+  background: var(--bg-glass-hover);
+}
+
+.evidence-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.evidence-accordion-trigger h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.evidence-card-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.accordion-chevron {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+}
+.evidence-accordion-item.open .accordion-chevron {
+  transform: rotate(180deg);
+  color: var(--accent-teal);
+}
+
+.evidence-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease-out), padding 0.3s var(--ease-out);
+  padding: 0 24px;
+}
+.evidence-accordion-item.open .evidence-accordion-body {
+  max-height: 500px;
+  padding: 0 24px 24px;
+}
+
+.evidence-accordion-body ul {
+  list-style: none;
+  padding: 0;
+}
+.evidence-accordion-body li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.evidence-accordion-body li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent-teal);
+  font-weight: 700;
+}
+.evidence-accordion-body li strong {
+  color: var(--text-primary);
+}
+.evidence-accordion-body li em {
+  color: var(--accent-purple);
+  font-style: normal;
+}
+
+.evidence-reassurance {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(45, 212, 191, 0.06);
+  border: 1px solid rgba(45, 212, 191, 0.15);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.evidence-reassurance span {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.evidence-reassurance strong {
+  color: var(--text-primary);
+}
+
+/* --- Hospital Card Actions Row --- */
+.hospital-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.hospital-actions .btn-sm {
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  border-radius: 6px;
+}
+
+/* --- Cover Your Tracks Modal Steps --- */
+.cover-tracks-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+.cover-tracks-step .step-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gradient-accent);
+  color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.cover-tracks-step h4 {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+.cover-tracks-step p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- Accessibility: Improved Muted Text Contrast --- */
+/* Override --text-muted for better WCAG contrast against dark backgrounds */
+.form-hint,
+.location-status .coordinates {
+  color: #8294aa; /* 4.6:1 contrast ratio against #0a0e1a */
+}
+
 /* --- Responsive --- */
 @media (max-width: 1024px) {
   .hero-grid {
@@ -1441,6 +1731,33 @@ img {
   .privacy-banner .container {
     flex-direction: column;
     gap: 16px;
+  }
+
+  .decoy-btn {
+    right: 110px;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  .evidence-urgency-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .evidence-accordion-trigger {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .evidence-card-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .hospital-actions {
+    flex-direction: column;
   }
 }
 

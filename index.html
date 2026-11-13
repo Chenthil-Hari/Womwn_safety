@@ -9,6 +9,8 @@
   <meta property="og:title" content="SafeHer — Confidential Evidence Collection Portal" />
   <meta property="og:description" content="Secure, anonymous evidence collection and police reporting for survivors of sexual assault." />
   <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+  <link rel="manifest" href="manifest.json" />
 
   <!-- Leaflet CSS for Maps -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -26,10 +28,28 @@
   </div>
 
   <!-- Quick Exit Button -->
-  <button class="quick-exit" id="quickExit" title="Quickly leave this site (Esc)">
+  <button class="quick-exit" id="quickExit" title="Quickly leave this site (Esc)" aria-label="Quick Exit — leave this site immediately">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
     Quick Exit
   </button>
+
+  <!-- Decoy Mode Button -->
+  <button class="decoy-btn" id="decoyModeBtn" title="Switch to innocent-looking screen (Ctrl+M)" aria-label="Activate decoy camouflage screen">
+    🕶️ Decoy
+  </button>
+
+  <!-- Decoy Overlay (Google Search lookalike) -->
+  <div class="decoy-overlay" id="decoyOverlay" aria-hidden="true">
+    <div class="decoy-content">
+      <div class="decoy-logo">
+        <span style="color:#4285F4;font-size:4.5rem;font-weight:400;font-family:'Product Sans',Arial,sans-serif;">G</span><span style="color:#EA4335;font-size:4.5rem;font-weight:400;font-family:'Product Sans',Arial,sans-serif;">o</span><span style="color:#FBBC05;font-size:4.5rem;font-weight:400;font-family:'Product Sans',Arial,sans-serif;">o</span><span style="color:#4285F4;font-size:4.5rem;font-weight:400;font-family:'Product Sans',Arial,sans-serif;">g</span><span style="color:#34A853;font-size:4.5rem;font-weight:400;font-family:'Product Sans',Arial,sans-serif;">l</span><span style="color:#EA4335;font-size:4.5rem;font-weight:400;font-family:'Product Sans',Arial,sans-serif;">e</span>
+      </div>
+      <div class="decoy-searchbar">
+        <input type="text" placeholder="Search Google or type a URL" disabled />
+      </div>
+      <p class="decoy-hint">Click anywhere to return to SafeHer</p>
+    </div>
+  </div>
 
   <!-- ======== NAVIGATION ======== -->
   <nav class="navbar" id="navbar">
@@ -40,6 +60,7 @@
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#evidence-checklist">72h Checklist</a></li>
         <li><a href="#hospital-finder">Find Hospital</a></li>
         <li><a href="#case-filing">File a Case</a></li>
         <li><a href="#track-case">Track Case</a></li>
@@ -123,6 +144,11 @@
         <div class="icon">🕶️</div>
         <span>Quick Exit Enabled</span>
       </div>
+      <div class="privacy-item privacy-item-btn">
+        <button class="btn btn-sm btn-secondary" id="coverTracksBtn" style="padding:8px 16px;font-size:0.8rem;">
+          🧹 Cover Your Tracks
+        </button>
+      </div>
     </div>
   </div>
 
@@ -166,6 +192,114 @@
     </div>
   </section>
 
+  <!-- ======== EVIDENCE PRESERVATION CHECKLIST ======== -->
+  <section class="checklist-section" id="evidence-checklist">
+    <div class="container">
+      <div class="section-header" style="text-align:center;margin-bottom:48px;">
+        <div class="section-label">Critical Information</div>
+        <h2 class="section-title">The 72-Hour <span class="text-gradient-warm">Evidence Window</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">
+          Forensic evidence degrades rapidly. These steps can make or break a case. Please read before visiting the hospital.
+        </p>
+      </div>
+
+      <div class="evidence-urgency-banner">
+        <span class="urgency-icon">⏳</span>
+        <div>
+          <strong>Time-sensitive:</strong> Physical forensic evidence (DNA, toxicology, bruising documentation) is most effectively collected within <strong>72 hours</strong> of the incident. The sooner you act, the stronger your case.
+        </div>
+      </div>
+
+      <div class="evidence-grid">
+        <!-- Accordion Item 1 -->
+        <div class="evidence-accordion-item">
+          <button class="evidence-accordion-trigger" aria-expanded="false">
+            <span class="evidence-card-icon">👕</span>
+            <div>
+              <h3>Preserve Clothing & Physical Evidence</h3>
+              <p class="evidence-card-hint">What to keep, and how</p>
+            </div>
+            <span class="accordion-chevron">▼</span>
+          </button>
+          <div class="evidence-accordion-body">
+            <ul>
+              <li>Place the clothing you were wearing in a <strong>breathable paper bag</strong> (never plastic — it destroys DNA).</li>
+              <li>If you changed clothes, save the original garments separately.</li>
+              <li>Keep any torn fabric, buttons, or items found at the scene.</li>
+              <li>Do not wash, iron, or fold the clothing.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Accordion Item 2 -->
+        <div class="evidence-accordion-item">
+          <button class="evidence-accordion-trigger" aria-expanded="false">
+            <span class="evidence-card-icon">🚿</span>
+            <div>
+              <h3>Avoid Bathing or Cleaning</h3>
+              <p class="evidence-card-hint">Why this matters for evidence collection</p>
+            </div>
+            <span class="accordion-chevron">▼</span>
+          </button>
+          <div class="evidence-accordion-body">
+            <ul>
+              <li>If possible, <strong>do not bathe, shower, douche, brush teeth, or wash hands</strong> before your medical examination.</li>
+              <li>This preserves trace DNA, saliva, and other biological evidence on your body.</li>
+              <li><em>If you have already bathed — evidence can still be collected. Do not let this stop you from seeking help.</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Accordion Item 3 -->
+        <div class="evidence-accordion-item">
+          <button class="evidence-accordion-trigger" aria-expanded="false">
+            <span class="evidence-card-icon">💊</span>
+            <div>
+              <h3>Time-Sensitive Medical Care</h3>
+              <p class="evidence-card-hint">Emergency contraception & STI prevention</p>
+            </div>
+            <span class="accordion-chevron">▼</span>
+          </button>
+          <div class="evidence-accordion-body">
+            <ul>
+              <li><strong>Emergency contraception</strong> is most effective within 72 hours (available at the hospital).</li>
+              <li><strong>HIV PEP</strong> (Post-Exposure Prophylaxis) must be started within 72 hours to be effective.</li>
+              <li>The hospital can test for and treat other STIs as part of the forensic exam.</li>
+              <li>All medical treatment is <strong>free of cost</strong> under Supreme Court / statutory mandates.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Accordion Item 4 -->
+        <div class="evidence-accordion-item">
+          <button class="evidence-accordion-trigger" aria-expanded="false">
+            <span class="evidence-card-icon">🏥</span>
+            <div>
+              <h3>What to Expect at the Hospital</h3>
+              <p class="evidence-card-hint">The SAFE exam process — your rights</p>
+            </div>
+            <span class="accordion-chevron">▼</span>
+          </button>
+          <div class="evidence-accordion-body">
+            <ul>
+              <li>A <strong>Sexual Assault Forensic Exam (SAFE)</strong> is performed by trained medical professionals.</li>
+              <li>The exam is <strong>entirely voluntary</strong> — you can stop, pause, or refuse any part at any time.</li>
+              <li>You have the right to request a <strong>female doctor and/or chaperone</strong>.</li>
+              <li>You have the right to have a <strong>support person or advocate</strong> present.</li>
+              <li>The exam typically takes 2–4 hours and includes evidence collection, photography of injuries (with consent), and medical treatment.</li>
+              <li>The exam is <strong>free</strong> — the hospital cannot charge you.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="evidence-reassurance">
+        <span>💛</span>
+        <p><strong>Remember:</strong> Even if hours or days have passed, even if you have bathed or changed — evidence can still be found. It is <em>never</em> too late to seek help. Your courage matters more than any timeline.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ======== HOSPITAL FINDER ======== -->
   <section class="hospital-finder" id="hospital-finder">
     <div class="container">
@@ -186,9 +320,13 @@
             </div>
             <div class="coordinates" id="coordinates"></div>
           </div>
-          <button class="btn btn-primary" id="detectLocationBtn" style="width:100%;justify-content:center;margin-bottom:24px;">
+          <button class="btn btn-primary" id="detectLocationBtn" style="width:100%;justify-content:center;margin-bottom:16px;">
             📍 Detect My Location
           </button>
+
+          <div class="finder-search-box" style="margin-bottom:16px;">
+            <input type="text" class="form-input" id="hospitalSearchInput" placeholder="🔍 Search hospital, city, or locality..." />
+          </div>
 
           <div class="hospital-list" id="hospitalList">
             <!-- Hospital cards populated by JS -->
@@ -215,7 +353,7 @@
 
       <div class="form-container">
         <!-- Progress Bar -->
-        <div class="form-progress" id="formProgress">
+        <div class="form-progress" id="formProgress" role="progressbar" aria-live="polite" aria-label="Form progress">
           <div class="progress-step">
             <div class="progress-dot active" data-step="1">1</div>
             <span class="progress-label">Incident</span>
@@ -273,7 +411,7 @@
 
             <div class="form-actions">
               <div></div>
-              <button type="button" class="btn btn-primary" onclick="nextStep(1)">Continue →</button>
+              <button type="button" class="btn btn-primary" data-action="next" data-step="1">Continue →</button>
             </div>
           </div>
 
@@ -306,8 +444,8 @@
             </div>
 
             <div class="form-actions">
-              <button type="button" class="btn btn-secondary" onclick="prevStep(2)">← Back</button>
-              <button type="button" class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
+              <button type="button" class="btn btn-secondary" data-action="prev" data-step="2">← Back</button>
+              <button type="button" class="btn btn-primary" data-action="next" data-step="2">Continue →</button>
             </div>
           </div>
 
@@ -348,8 +486,8 @@
             </div>
 
             <div class="form-actions">
-              <button type="button" class="btn btn-secondary" onclick="prevStep(3)">← Back</button>
-              <button type="button" class="btn btn-primary" onclick="nextStep(3)">Continue →</button>
+              <button type="button" class="btn btn-secondary" data-action="prev" data-step="3">← Back</button>
+              <button type="button" class="btn btn-primary" data-action="next" data-step="3">Continue →</button>
             </div>
           </div>
 
@@ -368,7 +506,7 @@
             </div>
 
             <div class="form-actions">
-              <button type="button" class="btn btn-secondary" onclick="prevStep(4)">← Back</button>
+              <button type="button" class="btn btn-secondary" data-action="prev" data-step="4">← Back</button>
               <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">🛡️ Submit Anonymous Report</button>
             </div>
           </div>
@@ -387,7 +525,7 @@
                 ⚠️ <strong>Important:</strong> Write this ID down somewhere safe. It is the only way to access your case status. This ID cannot be recovered.
               </p>
               <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-                <button type="button" class="btn btn-primary" onclick="copyCaseId()">📋 Copy Case ID</button>
+                <button type="button" class="btn btn-primary" id="copyCaseBtn" onclick="copyCaseId(event)">📋 Copy Case ID</button>
                 <a href="#track-case" class="btn btn-secondary">Track Your Case →</a>
               </div>
             </div>
@@ -440,15 +578,23 @@
           <h3>Women Helpline</h3>
           <p>National Commission for Women — 24/7 toll-free helpline for women in distress.</p>
           <span class="phone-number">181</span>
-          <a href="tel:181" class="btn btn-primary">Call Now</a>
+          <a href="tel:181" class="btn btn-primary">Call 181</a>
+        </div>
+
+        <div class="emergency-card">
+          <span class="card-emoji">📱</span>
+          <h3>Silent Help (WhatsApp)</h3>
+          <p>Cannot speak aloud? Text NCW's confidential 24/7 emergency WhatsApp support.</p>
+          <span class="phone-number">7217-735-372</span>
+          <a href="https://wa.me/917217735372?text=Emergency%20Help%20Needed" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background:#25D366;color:#fff;">💬 WhatsApp Text</a>
         </div>
 
         <div class="emergency-card">
           <span class="card-emoji">👮</span>
           <h3>Police Emergency</h3>
-          <p>Immediate police assistance. Reports can be filed over the phone.</p>
-          <span class="phone-number">100</span>
-          <a href="tel:100" class="btn btn-outline">Call Police</a>
+          <p>Immediate police assistance across India (100 / 112 National Emergency).</p>
+          <span class="phone-number">112 / 100</span>
+          <a href="tel:112" class="btn btn-outline">Call 112</a>
         </div>
 
         <div class="emergency-card">
@@ -517,6 +663,53 @@
       </div>
     </div>
   </footer>
+
+  <!-- ======== COVER YOUR TRACKS MODAL ======== -->
+  <div class="modal-overlay" id="coverTracksModal" role="dialog" aria-label="Cover Your Tracks Guide">
+    <div class="modal" style="max-width:560px;">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <div style="text-align:center;margin-bottom:24px;">
+        <span style="font-size:3rem;">🧹</span>
+        <h3 style="font-family:var(--font-heading);font-size:1.4rem;font-weight:700;margin-top:12px;">Cover Your Tracks</h3>
+        <p style="font-size:0.85rem;color:var(--text-secondary);margin-top:8px;">Protect your browsing history from others who may use this device.</p>
+      </div>
+
+      <div style="display:grid;gap:16px;margin-bottom:24px;">
+        <div class="cover-tracks-step">
+          <div class="step-badge">1</div>
+          <div>
+            <h4>Use Incognito / Private Browsing</h4>
+            <p>Open a <strong>new Incognito window</strong> (Ctrl+Shift+N in Chrome, Ctrl+Shift+P in Firefox) before visiting this site. No history is saved.</p>
+          </div>
+        </div>
+        <div class="cover-tracks-step">
+          <div class="step-badge">2</div>
+          <div>
+            <h4>Delete Specific History Entries</h4>
+            <p>Press <strong>Ctrl+H</strong> to open your browser history. Search for this site and delete only those entries — no need to clear everything.</p>
+          </div>
+        </div>
+        <div class="cover-tracks-step">
+          <div class="step-badge">3</div>
+          <div>
+            <h4>Check Shared Account Sync</h4>
+            <p>If your browser is signed into a <strong>shared Google or iCloud account</strong>, your history may sync to other devices. Consider signing out of the browser before visiting.</p>
+          </div>
+        </div>
+        <div class="cover-tracks-step">
+          <div class="step-badge">4</div>
+          <div>
+            <h4>Clear Autofill Suggestions</h4>
+            <p>Your browser may suggest this website's URL when typing in the address bar. In Chrome, hover over the suggestion and press <strong>Shift+Delete</strong> to remove it.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="document.getElementById('coverTracksModal').classList.remove('active')">
+        I Understand — Close
+      </button>
+    </div>
+  </div>
 
   <!-- ======== DISCLAIMER MODAL ======== -->
   <div class="modal-overlay" id="disclaimerModal">
